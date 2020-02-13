@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<link rel="stylesheet" type="text/css" href="date_time/jquery.datetimepicker.css"/>
+<style type="text/css">
+
+.custom-date-style {
+	background-color: red !important;
+}
+
+.input{	
+}
+.input-wide{
+	width: 500px;
+}
+
+</style>
+</head>
+<body>
+<select name="category[]" id="category" class="icon-menu" onchange="myFunction()">
+  <option value="all">All</option>
+  <option value="misc">misc</option>
+  <option value="travel">travel</option>
+  <option value="weather">weather</option>
+  <option value="shopping">shopping</option>
+  <option value="restaurant">restaurant</option>
+  <option value="food">food</option>
+  <option value="kitchen">kitchen</option></select>
+	</select>
+
+	<input type="text" value="" id="datetimepicker"/><br><br>
+ 
+</body>
+<script src="date_time/jquery.js"></script>
+<script src="date_time/js/jquery.datetimepicker.full.js"></script>
+<script>/*
+window.onerror = function(errorMsg) {
+	$('#console').html($('#console').html()+'<br>'+errorMsg)
+}*/
+
+
+
+function myFunction()
+{
+ $('#datetimepicker').datetimepicker({value:'Date()',step:10});
+}
+
+$.datetimepicker.setLocale('en');
+
+$('#datetimepicker_format').datetimepicker({value:Date(), format: $("#datetimepicker_format_value").val()});
+console.log($('#datetimepicker_format').datetimepicker('getValue'));
+
+$("#datetimepicker_format_change").on("click", function(e){
+	$("#datetimepicker_format").data('xdsoft_datetimepicker').setOptions({format: $("#datetimepicker_format_value").val()});
+});
+$("#datetimepicker_format_locale").on("change", function(e){
+	$.datetimepicker.setLocale($(e.currentTarget).val());
+});
+
+$('#datetimepicker').datetimepicker({
+dayOfWeekStart : 1,
+lang:'en',
+disabledDates:['1986/01/08','1986/01/09','1986/01/10'],
+startDate:	'1986/01/05'
+});
+$('#datetimepicker').datetimepicker({value:'1986/01/09 22:00',step:10});
+
+$('.some_class').datetimepicker();
+
+$('#default_datetimepicker').datetimepicker({
+	formatTime:'H:i',
+	formatDate:'d.m.Y',
+	//defaultDate:'8.12.1986', // it's my birthday
+	defaultDate:'+03.01.1970', // it's my birthday
+	defaultTime:'10:00',
+	timepickerScrollbar:false
+});
+
+
+var logic = function( currentDateTime ){
+	if (currentDateTime && currentDateTime.getDay() == 6){
+		this.setOptions({
+			minTime:'11:00'
+		});
+	}else
+		this.setOptions({
+			minTime:'8:00'
+		});
+};
+
+
+</script>
+</html>
